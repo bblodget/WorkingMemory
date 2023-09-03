@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ban7g60nv7b4h"]
+[gd_scene load_steps=5 format=3 uid="uid://ban7g60nv7b4h"]
 
 [ext_resource type="Script" path="res://GameScene.gd" id="1_6qy41"]
 [ext_resource type="Theme" path="res://BaseTheme.tres" id="2_1htor"]
+[ext_resource type="PackedScene" uid="uid://cis3uive57ohu" path="res://Textbox2.tscn" id="3_4kuba"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sguwi"]
 bg_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
@@ -42,7 +43,21 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="Textbox2" parent="CanvasLayer/MarginContainer/Rows/MarginContainer" instance=ExtResource("3_4kuba")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
 [node name="Numbers" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -77,6 +92,7 @@ custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("2_1htor")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 80
 text = "1"
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://IntroScene.gd" id="1_megfh"]
 [ext_resource type="Theme" path="res://BaseTheme.tres" id="2_1htor"]
-[ext_resource type="PackedScene" uid="uid://76v27umovvwy" path="res://Textbox.tscn" id="3_lkw3e"]
+[ext_resource type="PackedScene" uid="uid://cis3uive57ohu" path="res://Textbox2.tscn" id="3_83dst"]
 
 [node name="IntroScene" type="Node"]
 script = ExtResource("1_megfh")
@@ -26,4 +26,14 @@ theme_override_font_sizes/font_size = 60
 text = "Working Memory"
 horizontal_alignment = 1
 
-[node name="Textbox" parent="." instance=ExtResource("3_lkw3e")]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/BackstoryRow"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Textbox2" parent="CanvasLayer/MarginContainer/BackstoryRow/MarginContainer" instance=ExtResource("3_83dst")]
+layout_mode = 2
+size_flags_vertical = 3
