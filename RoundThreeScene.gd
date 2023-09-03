@@ -1,13 +1,9 @@
 extends "res://BasicScene.gd"
 
 @onready var textbox = $Textbox
-@onready var begin_button : Button = $CanvasLayer/MarginContainer/BackRow/BeginButton
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	begin_button.connect("pressed", _on_begin_button_pressed)
-	
 	textbox.textbox_close.connect(_on_textbox_close)
 	
 	textbox.queue_text(
@@ -18,10 +14,6 @@ func _ready():
 		"\n\n<press spacebar to continue>"
 	)
 	
-	
-	
-func _on_begin_button_pressed():
-	emit_signal("scene_change", "res://RoundOneScene.tscn")
 	
 func _on_textbox_close():
 	emit_signal("scene_change", "res://RoundOneScene.tscn")

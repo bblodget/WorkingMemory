@@ -26,16 +26,4 @@ theme_override_font_sizes/font_size = 60
 text = "Round Three"
 horizontal_alignment = 1
 
-[node name="BackRow" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
-layout_mode = 2
-alignment = 2
-
-[node name="BeginButton" type="Button" parent="CanvasLayer/MarginContainer/BackRow"]
-visible = false
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("2_1htor")
-text = "Begin"
-
 [node name="Textbox" parent="." instance=ExtResource("3_lkw3e")]

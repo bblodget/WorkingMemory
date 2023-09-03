@@ -42,11 +42,11 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
+[node name="Numbers" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
 layout_mode = 2
 alignment = 1
 
-[node name="Digit1" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+[node name="Digit0" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -54,25 +54,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1/MarginContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0/MarginContainer"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0/MarginContainer"]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1/MarginContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -80,7 +80,7 @@ theme = ExtResource("2_1htor")
 theme_override_font_sizes/font_size = 80
 text = "1"
 
-[node name="Digit2" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+[node name="Digit1" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -88,25 +88,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2/MarginContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1/MarginContainer"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1/MarginContainer"]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2/MarginContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -114,7 +114,7 @@ theme = ExtResource("2_1htor")
 theme_override_font_sizes/font_size = 80
 text = "1"
 
-[node name="Digit3" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+[node name="Digit2" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -122,25 +122,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3/MarginContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2/MarginContainer"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2/MarginContainer"]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3/MarginContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -148,7 +148,7 @@ theme = ExtResource("2_1htor")
 theme_override_font_sizes/font_size = 80
 text = "1"
 
-[node name="Digit4" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+[node name="Digit3" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -156,25 +156,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4/MarginContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3/MarginContainer"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3/MarginContainer"]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4/MarginContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -182,7 +182,7 @@ theme = ExtResource("2_1htor")
 theme_override_font_sizes/font_size = 80
 text = "1"
 
-[node name="Digit5" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+[node name="Digit4" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -190,25 +190,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5/MarginContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4/MarginContainer"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4/MarginContainer"]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5/MarginContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -216,7 +216,7 @@ theme = ExtResource("2_1htor")
 theme_override_font_sizes/font_size = 80
 text = "1"
 
-[node name="Digit6" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+[node name="Digit5" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -224,25 +224,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6/MarginContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5/MarginContainer"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5/MarginContainer"]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6/MarginContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -250,7 +250,7 @@ theme = ExtResource("2_1htor")
 theme_override_font_sizes/font_size = 80
 text = "1"
 
-[node name="Digit7" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+[node name="Digit6" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/margin_left = 10
@@ -258,25 +258,25 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7/MarginContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6/MarginContainer"]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6/MarginContainer"]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7/MarginContainer/HBoxContainer"]
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
 size_flags_vertical = 0
