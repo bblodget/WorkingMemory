@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://ban7g60nv7b4h"]
+[gd_scene load_steps=4 format=3 uid="uid://ban7g60nv7b4h"]
 
 [ext_resource type="Script" path="res://GameScene.gd" id="1_6qy41"]
 [ext_resource type="Theme" path="res://BaseTheme.tres" id="2_1htor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sguwi"]
+bg_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 10
 
 [node name="GameScene" type="Node"]
 script = ExtResource("1_6qy41")
@@ -25,11 +37,266 @@ theme_override_font_sizes/font_size = 60
 text = "Round One"
 horizontal_alignment = 1
 
-[node name="Round Two" type="Label" parent="CanvasLayer/MarginContainer/Rows"]
+[node name="spacer1" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
+layout_mode = 2
+alignment = 1
+
+[node name="Digit1" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1/MarginContainer"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit1/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_1htor")
+theme_override_font_sizes/font_size = 80
+text = "1"
+
+[node name="Digit2" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2/MarginContainer"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_1htor")
+theme_override_font_sizes/font_size = 80
+text = "1"
+
+[node name="Digit3" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3/MarginContainer"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit3/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_1htor")
+theme_override_font_sizes/font_size = 80
+text = "1"
+
+[node name="Digit4" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4/MarginContainer"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit4/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_1htor")
+theme_override_font_sizes/font_size = 80
+text = "1"
+
+[node name="Digit5" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5/MarginContainer"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit5/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_1htor")
+theme_override_font_sizes/font_size = 80
+text = "1"
+
+[node name="Digit6" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6/MarginContainer"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit6/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_1htor")
+theme_override_font_sizes/font_size = 80
+text = "1"
+
+[node name="Digit7" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7/MarginContainer"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/HBoxContainer/Digit7/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_1htor")
+theme_override_font_sizes/font_size = 80
+text = "1"
+
+[node name="spacer3" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="spacer2" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="CanvasLayer/MarginContainer/Rows/spacer2"]
 layout_mode = 2
 theme = ExtResource("2_1htor")
 theme_override_colors/font_color = Color(0.266667, 0.933333, 1, 1)
 theme_override_font_sizes/font_size = 60
-text = "Round Two
+text = "Score: 0
 "
 horizontal_alignment = 1
