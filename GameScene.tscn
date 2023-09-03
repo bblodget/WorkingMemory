@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://ban7g60nv7b4h"]
+
+[ext_resource type="Script" path="res://GameScene.gd" id="1_6qy41"]
+[ext_resource type="Theme" path="res://BaseTheme.tres" id="2_1htor"]
+
+[node name="GameScene" type="Node"]
+script = ExtResource("1_6qy41")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Rows" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Round One" type="Label" parent="CanvasLayer/MarginContainer/Rows"]
+layout_mode = 2
+theme = ExtResource("2_1htor")
+theme_override_colors/font_color = Color(0.266667, 0.933333, 1, 1)
+theme_override_font_sizes/font_size = 60
+text = "Round One"
+horizontal_alignment = 1
+
+[node name="Round Two" type="Label" parent="CanvasLayer/MarginContainer/Rows"]
+layout_mode = 2
+theme = ExtResource("2_1htor")
+theme_override_colors/font_color = Color(0.266667, 0.933333, 1, 1)
+theme_override_font_sizes/font_size = 60
+text = "Round Two
+"
+horizontal_alignment = 1
