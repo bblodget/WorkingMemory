@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ci67asmmbabum"]
+
+[ext_resource type="FontFile" uid="uid://cc4hnb0qfrf72" path="res://Font/8-bit-operator/8bitOperatorPlus8-Regular.ttf" id="1_eemk7"]
+
+[resource]
+default_font = ExtResource("1_eemk7")
+default_font_size = 30
+Button/font_sizes/font_size = 60
