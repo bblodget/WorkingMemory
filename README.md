@@ -1,6 +1,6 @@
 # Working Memory
 
-![image](images/working_memory.png]
+![image](images/working_memory.png)
 
 Test your working memory in three rounds.
 Later rounds are worth more points.
