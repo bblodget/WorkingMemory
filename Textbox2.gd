@@ -46,14 +46,22 @@ func _process(delta):
 		State.FINISHED:
 			# enter is ui_accept
 			if Input.is_action_just_pressed("ui_accept"):
-				if !text_queue.is_empty():
-					change_state(State.READY)
-					hide_textbox()
-				else:
-					textbox_close.emit()
+				change_state(State.READY)
+				hide_textbox()
+				textbox_close.emit()
+				
+				#if !text_queue.is_empty():
+				#	change_state(State.READY)
+				#	hide_textbox()
+				#else:
+				#	textbox_close.emit()
 
 func queue_text(next_text):
 	text_queue.push_back(next_text)
+	
+func clear():
+	hide_textbox()
+	text_queue.clear()
 
 func hide_textbox():
 	start_symbol.text = ""

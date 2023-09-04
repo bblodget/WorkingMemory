@@ -21,10 +21,11 @@ extends "res://BasicScene.gd"
 @onready var digit_label6 : Label = $CanvasLayer/MarginContainer/Rows/Numbers/Digit6/MarginContainer/HBoxContainer/Value
 
 @onready var hide_timer : Timer = $HideTimer
-@onready var select_timer : Timer = $SelectTimer
+
+@onready var score_label : Label = $CanvasLayer/MarginContainer/Rows/spacer2/Score
 
 # Amount of time to show the numbers
-var show_time : float = 2.0
+var show_time_per_digit : float = 1.0
 
 var digit : Array = []
 var digit_label : Array = []
@@ -51,7 +52,7 @@ enum State {
 	HIDE,
 	INPUT,
 	WAIT_USER,
-	FINISHED
+	GAME_OVER
 }
 
 var current_state : State = State.INSTRUCTIONS
@@ -74,6 +75,7 @@ var target_digit = 0
 
 var correct_digit : bool = false
 
+var round_delay : float = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -159,18 +161,13 @@ func _setup_styles():
 	style_green.corner_radius_bottom_left = 20
 	style_green.corner_detail = 10
 	
+func _set_digit_boxes_white():
 	# Set all the styles to white initially 
 	for i in range(MAX_DIGITS):
 		var panel : Panel = digit[i].get_node("Panel") 
 		panel.add_theme_stylebox_override("panel", style_white)
 		
-	
-	
-#func _on_begin_button_pressed():
-#	emit_signal("scene_change", "res://RoundTwoScene.tscn")
-	
-#func _on_textbox_close():
-#	emit_signal("scene_change", "res://RoundTwoScene.tscn")
+
 
 func show_scene():
 	$CanvasLayer.visible = true
@@ -183,6 +180,7 @@ func start_scene():
 	current_state = State.INSTRUCTIONS
 	current_round = Round.NORMAL
 	enable = true
+	_set_digit_boxes_white()
 
 func _input(event):
 	if event is InputEventKey:
@@ -224,15 +222,21 @@ func _process(delta):
 			_input_numbers()
 		State.WAIT_USER:
 			pass
+		State.GAME_OVER:
+			_game_over()
 			
 func _show_instructions():
+	instructions.clear()
+	num_digits = 3
+	
 	match current_round:
 		Round.NORMAL:
 			instructions.queue_text(
-		"Remember the digits in the boxes as they fade away. " +
+		"Remember the digits in the boxes before they disappear. " +
 		"As each box is highlighted type the number that was in the box. " +
 		"Each digit is worth 10 points. " +
-		"\n\n<press spacebar to continue>")
+		"\n\n<press spacebar or enter to begin>")
+			round_delay = 1.0
 
 		Round.PLUS_ONE:
 			instructions.queue_text(
@@ -240,7 +244,8 @@ func _show_instructions():
 		"to each digit.  For example if the digits are 7 8 9, " +
 		"the correct response is 8 9 0. " +
 		"Each digit is worth 20 points. " +
-		"\n\n<press spacebar to continue>")
+		"\n\n<press spacebar or enter to begin>")
+			round_delay = 1.2
 
 		Round.PLUS_THREE:
 			instructions.queue_text(
@@ -248,7 +253,8 @@ func _show_instructions():
 		"to each digit.  For example if the digits are 7 8 9, " +
 		"the correct response is 0 1 2. " +
 		"Each digit is worth 30 points. " +
-		"\n\n<press spacebar to continue>")
+		"\n\n<<press spacebar or enter to begin>")
+			round_delay = 1.5
 	
 	instruction_container.visible = true
 	numbers.visible = false
@@ -264,6 +270,7 @@ func _on_textbox_close():
 	current_state = State.SELECT
 	
 func _select_number():
+	_set_digit_boxes_white()
 	instruction_container.visible = false
 	numbers.visible = true
 	
@@ -277,7 +284,9 @@ func _select_number():
 			
 	# Show the numbers for a period
 	current_state = State.HIDE
-	hide_timer.start(show_time)
+	
+			
+	hide_timer.start(show_time_per_digit*num_digits*round_delay)
 	
 
 func _on_hide_timer_timeout():
@@ -292,7 +301,9 @@ func _input_numbers():
 	current_state = State.WAIT_USER
 	
 	# Wait one second
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
+	
+	var all_correct : bool = true
 	
 	for i in range(num_digits):
 		print("highlight: digit"+str(i))
@@ -306,14 +317,33 @@ func _input_numbers():
 		panel.add_theme_stylebox_override("panel", style_yellow)
 		
 		# Wait one second
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(2.0*round_delay).timeout
 		
 		# Color box green if correct else red
 		if correct_digit:
 			# Make digit box green
 			panel.add_theme_stylebox_override("panel", style_green)
+			_inc_score()
 		else:
 			panel.add_theme_stylebox_override("panel", style_red)
+			all_correct = false
+			
+	# If got it correct add a box
+	if all_correct and num_digits < 7:
+		num_digits = num_digits + 1
+		current_state = State.SELECT
+	else:
+		match current_round:
+			Round.NORMAL:
+				current_round = Round.PLUS_ONE
+				current_state = State.INSTRUCTIONS
+			Round.PLUS_ONE:
+				current_round = Round.PLUS_THREE
+				current_state = State.INSTRUCTIONS
+			Round.PLUS_THREE:
+				current_state = State.GAME_OVER
+			
+	
 		
 		
 func _handle_number(user_value):
@@ -321,6 +351,11 @@ func _handle_number(user_value):
 		return
 	
 	var target_value : int = int(digit_label[target_digit].text)
+	match current_round:
+		Round.PLUS_ONE:
+			target_value = (target_value + 1) % 10
+		Round.PLUS_THREE:
+			target_value = (target_value + 3) % 10
 	
 	print("user_value: "+str(user_value)+" target_value: "+str(target_value))
 	if user_value == target_value:
@@ -333,6 +368,21 @@ func _handle_number(user_value):
 	# display the user value in the box
 	digit_label[target_digit].text = str(user_value)
 	digit_label[target_digit].visible = true
+	
+func _inc_score():
+	match current_round:
+		Round.NORMAL:
+			score += 10
+		Round.PLUS_ONE:
+			score += 20
+		Round.PLUS_THREE:
+			score += 30
+	
+	score_label.text = "Score: " + str(score)
+			
+
+func _game_over():
+	print("Game Over!")	
 	
 	
 	
