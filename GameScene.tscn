@@ -44,6 +44,12 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
+[node name="PlayAgainButton" type="Button" parent="CanvasLayer/MarginContainer/Rows"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_1htor")
+text = "Play Again!"
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows"]
 visible = false
 layout_mode = 2
@@ -313,6 +319,8 @@ alignment = 1
 
 [node name="spacer2" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
 layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
 
 [node name="Score" type="Label" parent="CanvasLayer/MarginContainer/Rows/spacer2"]
 layout_mode = 2
@@ -320,6 +328,24 @@ theme = ExtResource("2_1htor")
 theme_override_colors/font_color = Color(0.266667, 0.933333, 1, 1)
 theme_override_font_sizes/font_size = 60
 text = "Score: 0
+"
+horizontal_alignment = 1
+
+[node name="RoundMode" type="Label" parent="CanvasLayer/MarginContainer/Rows/spacer2"]
+layout_mode = 2
+theme = ExtResource("2_1htor")
+theme_override_colors/font_color = Color(0.266667, 0.933333, 1, 1)
+theme_override_font_sizes/font_size = 60
+text = "Mode: +0
+"
+horizontal_alignment = 1
+
+[node name="HighScore" type="Label" parent="CanvasLayer/MarginContainer/Rows/spacer2"]
+layout_mode = 2
+theme = ExtResource("2_1htor")
+theme_override_colors/font_color = Color(0.266667, 0.933333, 1, 1)
+theme_override_font_sizes/font_size = 60
+text = "High: 0
 "
 horizontal_alignment = 1
 

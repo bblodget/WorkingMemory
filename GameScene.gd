@@ -23,6 +23,12 @@ extends "res://BasicScene.gd"
 @onready var hide_timer : Timer = $HideTimer
 
 @onready var score_label : Label = $CanvasLayer/MarginContainer/Rows/spacer2/Score
+@onready var play_again : Button = $CanvasLayer/MarginContainer/Rows/PlayAgainButton
+
+@onready var high_score_label : Label = $CanvasLayer/MarginContainer/Rows/spacer2/HighScore
+@onready var round_label : Label = $CanvasLayer/MarginContainer/Rows/spacer2/RoundMode
+
+
 
 # Amount of time to show the numbers
 var show_time_per_digit : float = 1.0
@@ -32,6 +38,7 @@ var digit_label : Array = []
 var digit_value : Array = [0, 0, 0, 0, 0, 0, 0]
 
 var score : int = 0
+var high_score : int = 0
 var num_digits : int = 3
 
 var enable : bool = false
@@ -77,11 +84,14 @@ var correct_digit : bool = false
 
 var round_delay : float = 1.0
 
+var enable_user_input : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()  # Seed the random number generator
 	
 	instructions.textbox_close.connect(_on_textbox_close)
+	play_again.pressed.connect(_on_play_again_button)
 	
 	digit.append(digit0)
 	digit.append(digit1)
@@ -177,6 +187,8 @@ func hide_scene():
 
 	
 func start_scene():
+	score = 0
+	play_again.visible = false
 	current_state = State.INSTRUCTIONS
 	current_round = Round.NORMAL
 	enable = true
@@ -228,6 +240,7 @@ func _process(delta):
 func _show_instructions():
 	instructions.clear()
 	num_digits = 3
+	target_digit = 0
 	
 	match current_round:
 		Round.NORMAL:
@@ -237,6 +250,7 @@ func _show_instructions():
 		"Each digit is worth 10 points. " +
 		"\n\n<press spacebar or enter to begin>")
 			round_delay = 1.0
+			round_label.text = "Mode: +0"
 
 		Round.PLUS_ONE:
 			instructions.queue_text(
@@ -246,6 +260,7 @@ func _show_instructions():
 		"Each digit is worth 20 points. " +
 		"\n\n<press spacebar or enter to begin>")
 			round_delay = 1.2
+			round_label.text = "Mode: +1"
 
 		Round.PLUS_THREE:
 			instructions.queue_text(
@@ -253,8 +268,9 @@ func _show_instructions():
 		"to each digit.  For example if the digits are 7 8 9, " +
 		"the correct response is 0 1 2. " +
 		"Each digit is worth 30 points. " +
-		"\n\n<<press spacebar or enter to begin>")
+		"\n\n<press spacebar or enter to begin>")
 			round_delay = 1.5
+			round_label.text = "Mode: +3"
 	
 	instruction_container.visible = true
 	numbers.visible = false
@@ -317,7 +333,9 @@ func _input_numbers():
 		panel.add_theme_stylebox_override("panel", style_yellow)
 		
 		# Wait one second
+		enable_user_input = true
 		await get_tree().create_timer(2.0*round_delay).timeout
+		enable_user_input = false
 		
 		# Color box green if correct else red
 		if correct_digit:
@@ -348,6 +366,9 @@ func _input_numbers():
 		
 func _handle_number(user_value):
 	if current_state != State.WAIT_USER:
+		return
+		
+	if enable_user_input == false:
 		return
 	
 	var target_value : int = int(digit_label[target_digit].text)
@@ -383,6 +404,16 @@ func _inc_score():
 
 func _game_over():
 	print("Game Over!")	
+	instruction_container.visible = true
+	numbers.visible = false
+	play_again.visible = true
+	if score > high_score:
+		high_score = score
+		high_score_label.text = "High: " + str(high_score)
+	
+	
+func _on_play_again_button():
+	start_scene()
 	
 	
 	
