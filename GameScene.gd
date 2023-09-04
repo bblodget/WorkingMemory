@@ -1,5 +1,7 @@
 extends "res://BasicScene.gd"
 
+# ******** Node References ************
+
 @onready var instruction_container : MarginContainer = $CanvasLayer/MarginContainer/Rows/MarginContainer
 @onready var instructions : MarginContainer = $CanvasLayer/MarginContainer/Rows/MarginContainer/Textbox2
 
@@ -28,20 +30,27 @@ extends "res://BasicScene.gd"
 @onready var high_score_label : Label = $CanvasLayer/MarginContainer/Rows/spacer2/HighScore
 @onready var round_label : Label = $CanvasLayer/MarginContainer/Rows/spacer2/RoundMode
 
+# ********** Enumerations *************
+
+enum State {
+	INSTRUCTIONS,
+	WAIT,
+	SELECT,
+	HIDE,
+	INPUT,
+	WAIT_USER,
+	GAME_OVER,
+	PLAY_AGAIN
+}
 
 
-# Amount of time to show the numbers
-var show_time_per_digit : float = 1.0
+enum Round {
+	NORMAL,
+	PLUS_ONE,
+	PLUS_THREE
+}
 
-var digit : Array = []
-var digit_label : Array = []
-var digit_value : Array = [0, 0, 0, 0, 0, 0, 0]
-
-var score : int = 0
-var high_score : int = 0
-var num_digits : int = 3
-
-var enable : bool = false
+# ********** Constants *************
 
 const MAX_DIGITS = 7
 
@@ -51,40 +60,38 @@ const BLACK : Color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 const RED : Color = Color(0.764706, 0.14902, 0.0862745, 1)
 const GREEN : Color = Color(0.152941, 0.705882, 0.0745098, 1)
 
+const ROUND_DELAY_NORMAL = 1.0
+const ROUND_DELAY_PLUS_ONE = 1.2
+const ROUND_DELAY_PLUS_THREE = 1.6
 
-enum State {
-	INSTRUCTIONS,
-	WAIT,
-	SELECT,
-	HIDE,
-	INPUT,
-	WAIT_USER,
-	GAME_OVER
-}
+const DIGIT_DELAY = 2.0
 
-var current_state : State = State.INSTRUCTIONS
-
-enum Round {
-	NORMAL,
-	PLUS_ONE,
-	PLUS_THREE
-}
-
-var current_round : Round = Round.NORMAL
-
+# ************* Variables Not to be reset **********
 var style_white : StyleBoxFlat
 var style_yellow : StyleBoxFlat
 var style_green : StyleBoxFlat
 var style_red : StyleBoxFlat
 
+var high_score : int = 0
 
-var target_digit = 0
+# Amount of time to show the numbers
+var show_time_per_digit : float = 1.0
 
-var correct_digit : bool = false
+var digit : Array = []
+var digit_label : Array = []
 
-var round_delay : float = 1.0
 
+# ************** Variables to Reset between games  ***********
 var enable_user_input : bool = false
+var target_digit : int = 0
+var correct_digit : bool = false
+var round_delay : float = 1.0
+var current_round : Round = Round.NORMAL
+var current_state : State = State.INSTRUCTIONS
+var score : int = 0
+var num_digits : int = 3
+var digit_value : Array = [0, 0, 0, 0, 0, 0, 0]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -187,11 +194,17 @@ func hide_scene():
 
 	
 func start_scene():
-	score = 0
-	play_again.visible = false
-	current_state = State.INSTRUCTIONS
+	enable_user_input = false
+	target_digit = 0
+	correct_digit = false
+	round_delay = ROUND_DELAY_NORMAL
 	current_round = Round.NORMAL
-	enable = true
+	current_state = State.INSTRUCTIONS
+	score = 0
+	num_digits = 3
+	digit_value = [0, 0, 0, 0, 0, 0, 0]
+	
+	play_again.visible = false
 	_set_digit_boxes_white()
 
 func _input(event):
@@ -222,8 +235,7 @@ func _input(event):
 func _process(delta):
 	match current_state:
 		State.INSTRUCTIONS:
-			if enable:
-				_show_instructions()
+			_show_instructions()
 		State.WAIT:
 			pass
 		State.SELECT:
@@ -236,6 +248,8 @@ func _process(delta):
 			pass
 		State.GAME_OVER:
 			_game_over()
+		State.PLAY_AGAIN:
+			pass
 			
 func _show_instructions():
 	instructions.clear()
@@ -249,7 +263,7 @@ func _show_instructions():
 		"As each box is highlighted type the number that was in the box. " +
 		"Each digit is worth 10 points. " +
 		"\n\n<press spacebar or enter to begin>")
-			round_delay = 1.0
+			round_delay = ROUND_DELAY_NORMAL
 			round_label.text = "Mode: +0"
 
 		Round.PLUS_ONE:
@@ -259,7 +273,7 @@ func _show_instructions():
 		"the correct response is 8 9 0. " +
 		"Each digit is worth 20 points. " +
 		"\n\n<press spacebar or enter to begin>")
-			round_delay = 1.2
+			round_delay = ROUND_DELAY_PLUS_ONE
 			round_label.text = "Mode: +1"
 
 		Round.PLUS_THREE:
@@ -269,7 +283,7 @@ func _show_instructions():
 		"the correct response is 0 1 2. " +
 		"Each digit is worth 30 points. " +
 		"\n\n<press spacebar or enter to begin>")
-			round_delay = 1.5
+			round_delay = ROUND_DELAY_PLUS_THREE
 			round_label.text = "Mode: +3"
 	
 	instruction_container.visible = true
@@ -295,6 +309,8 @@ func _select_number():
 			digit[i].visible = true
 			digit_value[i] = randi() % 10
 			digit_label[i].text = str(digit_value[i])
+			print("digit: "+str(i)+" value: "+str(digit_value[i]))
+			digit_label[i].visible = true
 		else:
 			digit[i].visible = false
 			
@@ -334,7 +350,7 @@ func _input_numbers():
 		
 		# Wait one second
 		enable_user_input = true
-		await get_tree().create_timer(2.0*round_delay).timeout
+		await get_tree().create_timer(DIGIT_DELAY).timeout
 		enable_user_input = false
 		
 		# Color box green if correct else red
@@ -370,6 +386,8 @@ func _handle_number(user_value):
 		
 	if enable_user_input == false:
 		return
+		
+	enable_user_input = false
 	
 	var target_value : int = int(digit_label[target_digit].text)
 	match current_round:
@@ -404,6 +422,7 @@ func _inc_score():
 
 func _game_over():
 	print("Game Over!")	
+	current_state = State.PLAY_AGAIN
 	instruction_container.visible = true
 	numbers.visible = false
 	play_again.visible = true
