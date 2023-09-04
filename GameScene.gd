@@ -50,7 +50,7 @@ enum State {
 	SELECT,
 	HIDE,
 	INPUT,
-	WAIT2,
+	WAIT_USER,
 	FINISHED
 }
 
@@ -68,6 +68,11 @@ var style_white : StyleBoxFlat
 var style_yellow : StyleBoxFlat
 var style_green : StyleBoxFlat
 var style_red : StyleBoxFlat
+
+
+var target_digit = 0
+
+var correct_digit : bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -147,7 +152,7 @@ func _setup_styles():
 	style_green.border_width_top = 10
 	style_green.border_width_right = 10
 	style_green.border_width_bottom = 10
-	style_green.border_color = RED
+	style_green.border_color = GREEN
 	style_green.corner_radius_top_left = 20
 	style_green.corner_radius_top_right = 20
 	style_green.corner_radius_bottom_right = 20
@@ -178,7 +183,31 @@ func start_scene():
 	current_state = State.INSTRUCTIONS
 	current_round = Round.NORMAL
 	enable = true
-	
+
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			match event.keycode:
+				KEY_0, KEY_KP_0 : 
+					_handle_number(0)
+				KEY_1, KEY_KP_1 : 
+					_handle_number(1)
+				KEY_2, KEY_KP_2 : 
+					_handle_number(2)
+				KEY_3, KEY_KP_3 : 
+					_handle_number(3)
+				KEY_4, KEY_KP_4 : 
+					_handle_number(4)
+				KEY_5, KEY_KP_5 : 
+					_handle_number(5)
+				KEY_6, KEY_KP_6 : 
+					_handle_number(6)
+				KEY_7, KEY_KP_7 : 
+					_handle_number(7)
+				KEY_8, KEY_KP_8 : 
+					_handle_number(8)
+				KEY_9, KEY_KP_9 : 
+					_handle_number(9)
 	
 func _process(delta):
 	match current_state:
@@ -193,7 +222,7 @@ func _process(delta):
 			pass
 		State.INPUT:
 			_input_numbers()
-		State.WAIT2:
+		State.WAIT_USER:
 			pass
 			
 func _show_instructions():
@@ -260,22 +289,51 @@ func _on_hide_timer_timeout():
 	
 
 func _input_numbers():
-	current_state = State.WAIT2
+	current_state = State.WAIT_USER
+	
+	# Wait one second
+	await get_tree().create_timer(1.0).timeout
 	
 	for i in range(num_digits):
 		print("highlight: digit"+str(i))
+		target_digit = i
+		correct_digit = false
 		
 		# Get the child Panel of the current digit MarginContainer
 		var panel : Panel = digit[i].get_node("Panel") 
 		
+		# Make digit box yellow
 		panel.add_theme_stylebox_override("panel", style_yellow)
 		
+		# Wait one second
+		await get_tree().create_timer(2.0).timeout
+		
+		# Color box green if correct else red
+		if correct_digit:
+			# Make digit box green
+			panel.add_theme_stylebox_override("panel", style_green)
+		else:
+			panel.add_theme_stylebox_override("panel", style_red)
 		
 		
+func _handle_number(user_value):
+	if current_state != State.WAIT_USER:
+		return
+	
+	var target_value : int = int(digit_label[target_digit].text)
+	
+	print("user_value: "+str(user_value)+" target_value: "+str(target_value))
+	if user_value == target_value:
+		correct_digit = true
+		print("correct!")
+	else:
+		correct_digit = false
+		print("wrong!")
 		
-		# Access the StyleBoxFlat directly and modify the border color
-		#var style = panel.get_theme_stylebox("panel")
-		
-		# Modify the border color
-		#style.border_color = YELLOW
+	# display the user value in the box
+	digit_label[target_digit].text = str(user_value)
+	digit_label[target_digit].visible = true
+	
+	
+	
 
