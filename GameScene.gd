@@ -20,6 +20,11 @@ extends "res://BasicScene.gd"
 @onready var digit_label5 : Label = $CanvasLayer/MarginContainer/Rows/Numbers/Digit5/MarginContainer/HBoxContainer/Value
 @onready var digit_label6 : Label = $CanvasLayer/MarginContainer/Rows/Numbers/Digit6/MarginContainer/HBoxContainer/Value
 
+@onready var hide_timer : Timer = $HideTimer
+@onready var select_timer : Timer = $SelectTimer
+
+# Amount of time to show the numbers
+var show_time : float = 2.0
 
 var digit : Array = []
 var digit_label : Array = []
@@ -32,12 +37,20 @@ var enable : bool = false
 
 const MAX_DIGITS = 7
 
+const YELLOW : Color = Color(0.898039, 0.803922, 0.278431, 1)
+const WHITE : Color = Color(0.796078, 0.796078, 0.796078, 1)
+const BLACK : Color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+const RED : Color = Color(0.764706, 0.14902, 0.0862745, 1)
+const GREEN : Color = Color(0.152941, 0.705882, 0.0745098, 1)
+
+
 enum State {
 	INSTRUCTIONS,
 	WAIT,
 	SELECT,
 	HIDE,
 	INPUT,
+	WAIT2,
 	FINISHED
 }
 
@@ -51,7 +64,11 @@ enum Round {
 
 var current_round : Round = Round.NORMAL
 
-var tween : Tween
+var style_white : StyleBoxFlat
+var style_yellow : StyleBoxFlat
+var style_green : StyleBoxFlat
+var style_red : StyleBoxFlat
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -75,7 +92,73 @@ func _ready():
 	digit_label.append(digit_label5)
 	digit_label.append(digit_label6)
 	
-	#start_scene()
+	_setup_styles()
+	
+	start_scene()
+	
+func _setup_styles():
+	style_white = StyleBoxFlat.new()
+	style_yellow = StyleBoxFlat.new()
+	style_red = StyleBoxFlat.new()
+	style_green = StyleBoxFlat.new()
+	
+	# Setup style_white
+	style_white.bg_color = BLACK
+	style_white.border_width_left = 10
+	style_white.border_width_top = 10
+	style_white.border_width_right = 10
+	style_white.border_width_bottom = 10
+	style_white.border_color = WHITE
+	style_white.corner_radius_top_left = 20
+	style_white.corner_radius_top_right = 20
+	style_white.corner_radius_bottom_right = 20
+	style_white.corner_radius_bottom_left = 20
+	style_white.corner_detail = 10
+	
+	# Setup style_yellow
+	style_yellow.bg_color = BLACK
+	style_yellow.border_width_left = 10
+	style_yellow.border_width_top = 10
+	style_yellow.border_width_right = 10
+	style_yellow.border_width_bottom = 10
+	style_yellow.border_color = YELLOW
+	style_yellow.corner_radius_top_left = 20
+	style_yellow.corner_radius_top_right = 20
+	style_yellow.corner_radius_bottom_right = 20
+	style_yellow.corner_radius_bottom_left = 20
+	style_yellow.corner_detail = 10
+	
+	# Setup style_red
+	style_red.bg_color = BLACK
+	style_red.border_width_left = 10
+	style_red.border_width_top = 10
+	style_red.border_width_right = 10
+	style_red.border_width_bottom = 10
+	style_red.border_color = RED
+	style_red.corner_radius_top_left = 20
+	style_red.corner_radius_top_right = 20
+	style_red.corner_radius_bottom_right = 20
+	style_red.corner_radius_bottom_left = 20
+	style_red.corner_detail = 10
+	
+	# Setup style_green
+	style_green.bg_color = BLACK
+	style_green.border_width_left = 10
+	style_green.border_width_top = 10
+	style_green.border_width_right = 10
+	style_green.border_width_bottom = 10
+	style_green.border_color = RED
+	style_green.corner_radius_top_left = 20
+	style_green.corner_radius_top_right = 20
+	style_green.corner_radius_bottom_right = 20
+	style_green.corner_radius_bottom_left = 20
+	style_green.corner_detail = 10
+	
+	# Set all the styles to white initially 
+	for i in range(MAX_DIGITS):
+		var panel : Panel = digit[i].get_node("Panel") 
+		panel.add_theme_stylebox_override("panel", style_white)
+		
 	
 	
 #func _on_begin_button_pressed():
@@ -107,6 +190,10 @@ func _process(delta):
 		State.SELECT:
 			_select_number()
 		State.HIDE:
+			pass
+		State.INPUT:
+			_input_numbers()
+		State.WAIT2:
 			pass
 			
 func _show_instructions():
@@ -159,20 +246,36 @@ func _select_number():
 		else:
 			digit[i].visible = false
 			
-	# Hide the numbers
+	# Show the numbers for a period
 	current_state = State.HIDE
-	#tween = create_tween()
-	#tween.set_trans(Tween.TRANS_LINEAR)
-	#tween.set_ease(Tween.EASE_IN_OUT)
-	#for i in range(num_digits):
-	#	tween.tween_property(digit_label[i], "theme_override_colors/font_color", Color(1,1,1,0), 0.5).from(Color(1,1,1,1))
-	#tween.tween_callback(_on_tween_all_completed)
-	
-func _on_tween_all_completed():
-	print("done hidding")
-	current_state = State.FINISHED
-			
+	hide_timer.start(show_time)
 	
 
-			
+func _on_hide_timer_timeout():
+	print("hide numbers")
+	for i in range(num_digits):
+		digit_label[i].visible = false
+	
+	current_state = State.INPUT
+	
+
+func _input_numbers():
+	current_state = State.WAIT2
+	
+	for i in range(num_digits):
+		print("highlight: digit"+str(i))
+		
+		# Get the child Panel of the current digit MarginContainer
+		var panel : Panel = digit[i].get_node("Panel") 
+		
+		panel.add_theme_stylebox_override("panel", style_yellow)
+		
+		
+		
+		
+		# Access the StyleBoxFlat directly and modify the border color
+		#var style = panel.get_theme_stylebox("panel")
+		
+		# Modify the border color
+		#style.border_color = YELLOW
 

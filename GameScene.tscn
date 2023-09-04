@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ban7g60nv7b4h"]
+[gd_scene load_steps=6 format=3 uid="uid://ban7g60nv7b4h"]
 
 [ext_resource type="Script" path="res://GameScene.gd" id="1_6qy41"]
 [ext_resource type="Theme" path="res://BaseTheme.tres" id="2_1htor"]
 [ext_resource type="PackedScene" uid="uid://cis3uive57ohu" path="res://Textbox2.tscn" id="3_4kuba"]
+[ext_resource type="StyleBox" uid="uid://bgkv4f0rsrlty" path="res://style_white.tres" id="4_6uget"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sguwi"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bn65h"]
 bg_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 border_width_left = 10
 border_width_top = 10
@@ -30,12 +31,12 @@ theme_override_constants/margin_bottom = 32
 [node name="Rows" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 
-[node name="Round One" type="Label" parent="CanvasLayer/MarginContainer/Rows"]
+[node name="Working Memory" type="Label" parent="CanvasLayer/MarginContainer/Rows"]
 layout_mode = 2
 theme = ExtResource("2_1htor")
 theme_override_colors/font_color = Color(0.266667, 0.933333, 1, 1)
 theme_override_font_sizes/font_size = 60
-text = "Round One"
+text = "Working Memory"
 horizontal_alignment = 1
 
 [node name="spacer1" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
@@ -44,6 +45,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -57,7 +59,6 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
 [node name="Numbers" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows"]
-visible = false
 layout_mode = 2
 alignment = 1
 
@@ -71,7 +72,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+theme_override_styles/panel = ExtResource("4_6uget")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0"]
 layout_mode = 2
@@ -81,10 +82,10 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0/MarginContainer"]
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0/MarginContainer"]
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 2
 
 [node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit0/MarginContainer/HBoxContainer"]
@@ -106,7 +107,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bn65h")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1"]
 layout_mode = 2
@@ -116,10 +117,10 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1/MarginContainer"]
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1/MarginContainer"]
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 2
 
 [node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit1/MarginContainer/HBoxContainer"]
@@ -140,7 +141,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bn65h")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2"]
 layout_mode = 2
@@ -154,6 +155,7 @@ visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2/MarginContainer"]
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 2
 
 [node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit2/MarginContainer/HBoxContainer"]
@@ -174,7 +176,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bn65h")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3"]
 layout_mode = 2
@@ -188,6 +190,7 @@ visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3/MarginContainer"]
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 2
 
 [node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit3/MarginContainer/HBoxContainer"]
@@ -208,7 +211,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bn65h")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4"]
 layout_mode = 2
@@ -222,6 +225,7 @@ visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4/MarginContainer"]
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 2
 
 [node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit4/MarginContainer/HBoxContainer"]
@@ -242,7 +246,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bn65h")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5"]
 layout_mode = 2
@@ -256,6 +260,7 @@ visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5/MarginContainer"]
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 2
 
 [node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit5/MarginContainer/HBoxContainer"]
@@ -276,7 +281,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sguwi")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bn65h")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6"]
 layout_mode = 2
@@ -290,6 +295,7 @@ visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6/MarginContainer"]
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 2
 
 [node name="Value" type="Label" parent="CanvasLayer/MarginContainer/Rows/Numbers/Digit6/MarginContainer/HBoxContainer"]
@@ -316,3 +322,11 @@ theme_override_font_sizes/font_size = 60
 text = "Score: 0
 "
 horizontal_alignment = 1
+
+[node name="HideTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SelectTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]
